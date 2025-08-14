@@ -396,7 +396,7 @@ local function disconnectAll()
 end
 
 VisualsTab:CreateToggle({
-    Name = "Chams ESP",
+    Name = "Skeleton ESP",
     CurrentValue = false,
     Flag = "ChamsESPToggle",
     Callback = function(enabled)
@@ -594,20 +594,356 @@ VisualsTab:CreateToggle({
     end,
 })
 
-TeleportsTab:CreateButton({Name="Car Dealership",Callback=function()local p=game.Players.LocalPlayer local c=p.Character if c and c:FindFirstChild("HumanoidRootPart")then c.HumanoidRootPart.CFrame=CFrame.new(211.40,4.10,781.58)else warn("Tp Failed")end end})
-TeleportsTab:CreateButton({Name="Gunshop",Callback=function()local p=game.Players.LocalPlayer local c=p.Character if c and c:FindFirstChild("HumanoidRootPart")then c.HumanoidRootPart.CFrame=CFrame.new(475.93,4.08,454.75)else warn("Tp Failed")end end})
-TeleportsTab:CreateButton({Name="Blackmarket",Callback=function()local p=game.Players.LocalPlayer local c=p.Character if c and c:FindFirstChild("HumanoidRootPart")then c.HumanoidRootPart.CFrame=CFrame.new(748.23,4.40,684.13)else warn("Tp Failed")end end})
-TeleportsTab:CreateButton({Name="Bank",Callback=function()local p=game.Players.LocalPlayer local c=p.Character if c and c:FindFirstChild("HumanoidRootPart")then c.HumanoidRootPart.CFrame=CFrame.new(-132.70,4.30,140.51)else warn("Tp Failed")end end})
-TeleportsTab:CreateButton({Name="Bank Vault",Callback=function()local p=game.Players.LocalPlayer local c=p.Character if c and c:FindFirstChild("HumanoidRootPart")then c.HumanoidRootPart.CFrame=CFrame.new(-82.83,4.30,152.11)else warn("Tp Failed")end end})
-TeleportsTab:CreateButton({Name="Studio",Callback=function()local p=game.Players.LocalPlayer local c=p.Character if c and c:FindFirstChild("HumanoidRootPart")then c.HumanoidRootPart.CFrame=CFrame.new(403.79,413,775.74)else warn("Tp Failed")end end})
-TeleportsTab:CreateButton({Name="Box Delivery",Callback=function()local p=game.Players.LocalPlayer local c=p.Character if c and c:FindFirstChild("HumanoidRootPart")then c.HumanoidRootPart.CFrame=CFrame.new(580.53,3.88,735.17)else warn("Tp Failed")end end})
-TeleportsTab:CreateButton({Name="Swiping",Callback=function()local p=game.Players.LocalPlayer local c=p.Character if c and c:FindFirstChild("HumanoidRootPart")then c.HumanoidRootPart.CFrame=CFrame.new(-60.85,4.12,671.44)else warn("Tp Failed")end end})
-TeleportsTab:CreateButton({Name="Zaza Job",Callback=function()local p=game.Players.LocalPlayer local c=p.Character if c and c:FindFirstChild("HumanoidRootPart")then c.HumanoidRootPart.CFrame=CFrame.new(90.71,4.10,411.32)else warn("Tp Failed")end end})
-ModsTab:CreateToggle({Name="Open All Doors",CurrentValue=false,Flag="OpenAllDoorsToggle",Callback=function(e)for _,p in pairs(workspace:GetDescendants())do if p:IsA("BasePart")and p.Name=="asD"then p.CanCollide=not e p.Transparency=e and 1 or 0 end end end})
-ModsTab:CreateToggle({Name="Fly",CurrentValue=false,Flag="FlyToggle",Callback=function(e)local p=game.Players.LocalPlayer;local u=game:GetService("UserInputService");local r=game:GetService("RunService");local keys={};local function g()local c=workspace.CurrentCamera;local d=Vector3.new()if keys["W"]then d=d+c.CFrame.LookVector end;if keys["S"]then d=d-c.CFrame.LookVector end;if keys["A"]then d=d-c.CFrame.RightVector end;if keys["D"]then d=d+c.CFrame.RightVector end;if keys["Space"]then d=d+Vector3.new(0,1,0) end;if keys["LeftControl"]then d=d-Vector3.new(0,1,0) end;return d.Magnitude>0 and d.Unit or Vector3.new()end;u.InputBegan:Connect(function(i)if i.UserInputType==Enum.UserInputType.Keyboard then keys[i.KeyCode.Name]=true end end);u.InputEnded:Connect(function(i)if i.UserInputType==Enum.UserInputType.Keyboard then keys[i.KeyCode.Name]=false end end);if e then spawn(function()while Rayfield.Flags.FlyToggle.CurrentValue do local c=p.Character or p.CharacterAdded:Wait() local rP=c:WaitForChild("HumanoidRootPart") local h=c:WaitForChild("Humanoid") h.PlatformStand=true local m=g() rP.Velocity=rP.Velocity:Lerp(m*50,0.25) rP.AssemblyAngularVelocity=Vector3.new() r.Heartbeat:Wait()end end)else local c=p.Character if c then local rP=c:FindFirstChild("HumanoidRootPart") local h=c:FindFirstChild("Humanoid") if h then h.PlatformStand=false end if rP then rP.Velocity=Vector3.new() end end end end})
-ModsTab:CreateToggle({Name="Speed Boost",CurrentValue=false,Flag="SpeedToggle",Callback=function(e)local p=game.Players.LocalPlayer;spawn(function()while Rayfield.Flags.SpeedToggle.CurrentValue do local c=p.Character or p.CharacterAdded:Wait() local h=c:FindFirstChild("Humanoid")if h then h.WalkSpeed=e and 150 or 16 end wait()end end)end})
-ModsTab:CreateToggle({Name="Anti Death",CurrentValue=false,Flag="AntiDeathToggle",Callback=function(e)local p=game.Players.LocalPlayer;c=p.Character or p.CharacterAdded:Wait();local h=c:WaitForChild("Humanoid");local s=CFrame.new(-329.00,100.09,834.08)local o;local con;if e then o=c.HumanoidRootPart.CFrame;con=game:GetService("RunService").Heartbeat:Connect(function()if h.Health/h.MaxHealth<=0.32 then c.HumanoidRootPart.CFrame=s elseif h.Health/h.MaxHealth>=0.85 then if o then c.HumanoidRootPart.CFrame=o;o=nil end end end)Rayfield.Flags.AntiDeathToggle.Connection=con else if Rayfield.Flags.AntiDeathToggle.Connection then Rayfield.Flags.AntiDeathToggle.Connection:Disconnect()Rayfield.Flags.AntiDeathToggle.Connection=nil end end end})
 
+
+-- TELEPORTS TAB
+
+
+
+TeleportsTab:CreateButton({
+    Name = "Car Dealership",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            character.HumanoidRootPart.CFrame = CFrame.new(211.40, 4.10, 781.58)
+        else
+            warn("Tp Failed")
+        end
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "Gunshop",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            character.HumanoidRootPart.CFrame = CFrame.new(475.93, 4.08, 454.75)
+        else
+            warn("Tp Failed")
+        end
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "Blackmarket",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            character.HumanoidRootPart.CFrame = CFrame.new(748.23, 4.40, 684.13)
+        else
+            warn("Tp Failed")
+        end
+    end
+})
+
+
+TeleportsTab:CreateButton({
+    Name = "Bank",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            character.HumanoidRootPart.CFrame = CFrame.new(-132.70, 4.30, 140.51)
+        else
+            warn("Tp Failed")
+        end
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "Bank Vault",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            character.HumanoidRootPart.CFrame = CFrame.new(-82.83, 4.30, 152.11)
+        else
+            warn("Tp Failed")
+        end
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "Studio",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            character.HumanoidRootPart.CFrame = CFrame.new(403.79, 413, 775.74)
+        else
+            warn("Tp Failed")
+        end
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "Box Delivery",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            character.HumanoidRootPart.CFrame = CFrame.new(580.53, 3.88, 735.17)
+        else
+            warn("Tp Failed")
+        end
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "Swiping",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            character.HumanoidRootPart.CFrame = CFrame.new(-60.85, 4.12, 671.44)
+        else
+            warn("Tp Failed")
+        end
+    end
+})
+
+TeleportsTab:CreateButton({
+    Name = "Zaza Job",
+    Callback = function()
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            character.HumanoidRootPart.CFrame = CFrame.new(90.71, 4.10, 411.32)
+        else
+            warn("Tp Failed")
+        end
+    end
+})
+
+
+-- MODS TAB
+
+
+
+ModsTab:CreateToggle({
+    Name = "Open All Doors",
+    CurrentValue = false,
+    Flag = "OpenAllDoorsToggle",
+    Callback = function(enabled)
+        for _, part in pairs(workspace:GetDescendants()) do
+            if part:IsA("BasePart") and part.Name == "asD" then
+                if enabled then
+                    part.CanCollide = false
+                    part.Transparency = 1
+                else
+                    part.CanCollide = true
+                    part.Transparency = 0
+                end
+            end
+        end
+    end
+})
+
+
+ModsTab:CreateToggle({
+    Name = "Fly",
+    CurrentValue = false,
+    Flag = "FlyToggle",
+    Callback = function(enabled)
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local rootPart = character:WaitForChild("HumanoidRootPart")
+        local humanoid = character:WaitForChild("Humanoid")
+
+        if enabled then
+            humanoid.PlatformStand = true
+            spawn(function()
+                local UserInputService = game:GetService("UserInputService")
+                local RunService = game:GetService("RunService")
+
+                local flying = true
+                local speed = 50
+                local keys = {}
+
+                local function getMoveDirection()
+                    local cam = workspace.CurrentCamera
+                    local dir = Vector3.new()
+                    if keys["W"] then dir += cam.CFrame.LookVector end
+                    if keys["S"] then dir -= cam.CFrame.LookVector end
+                    if keys["A"] then dir -= cam.CFrame.RightVector end
+                    if keys["D"] then dir += cam.CFrame.RightVector end
+                    if keys["Space"] then dir += Vector3.new(0,1,0) end
+                    if keys["LeftControl"] then dir -= Vector3.new(0,1,0) end
+                    return dir.Magnitude > 0 and dir.Unit or Vector3.new()
+                end
+
+                UserInputService.InputBegan:Connect(function(input)
+                    if input.UserInputType == Enum.UserInputType.Keyboard then
+                        keys[input.KeyCode.Name] = true
+                    end
+                end)
+                UserInputService.InputEnded:Connect(function(input)
+                    if input.UserInputType == Enum.UserInputType.Keyboard then
+                        keys[input.KeyCode.Name] = false
+                    end
+                end)
+
+                while flying and Rayfield.Flags.FlyToggle.CurrentValue do
+                    local moveDir = getMoveDirection()
+                    rootPart.Velocity = rootPart.Velocity:Lerp(moveDir * speed, 0.25)
+                    rootPart.AssemblyAngularVelocity = Vector3.new()
+                    RunService.Heartbeat:Wait()
+                end
+
+                humanoid.PlatformStand = false
+                rootPart.Velocity = Vector3.new()
+            end)
+        else
+            humanoid.PlatformStand = false
+            rootPart.Velocity = Vector3.new()
+        end
+    end
+})
+
+
+ModsTab:CreateToggle({
+    Name = "Speed Boost",
+    CurrentValue = false,
+    Flag = "SpeedToggle",
+    Callback = function(enabled)
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoid = character:WaitForChild("Humanoid")
+        if enabled then
+            spawn(function()
+                while Rayfield.Flags.SpeedToggle.CurrentValue do
+                    if humanoid then
+                        humanoid.WalkSpeed = 150
+                    end
+                    wait(0) 
+                end
+            end)
+        else
+            if humanoid then
+                humanoid.WalkSpeed = 16
+            end
+        end
+    end
+})
+
+ModsTab:CreateToggle({
+    Name = "Anti Death",
+    CurrentValue = false,
+    Flag = "AntiDeathToggle",
+    Callback = function(enabled)
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoid = character:WaitForChild("Humanoid")
+        local safePos = CFrame.new(-329.00, 100.09, 834.08)
+        local originalPos
+
+        local connection
+        if enabled then
+            originalPos = character.HumanoidRootPart.CFrame
+            connection = game:GetService("RunService").Heartbeat:Connect(function()
+                if humanoid.Health / humanoid.MaxHealth <= 0.32 then
+                    character.HumanoidRootPart.CFrame = safePos
+                elseif humanoid.Health / humanoid.MaxHealth >= 0.85 then
+                    if originalPos then
+                        character.HumanoidRootPart.CFrame = originalPos
+                        originalPos = nil 
+                    end
+                end
+            end)
+            Rayfield.Flags.AntiDeathToggle.Connection = connection
+        else
+            if Rayfield.Flags.AntiDeathToggle.Connection then
+                Rayfield.Flags.AntiDeathToggle.Connection:Disconnect()
+                Rayfield.Flags.AntiDeathToggle.Connection = nil
+            end
+        end
+    end
+})
+
+local Button = ModsTab:CreateButton({
+    Name = "Spawn Draco",
+    Callback = function()
+        local rs = game:GetService("ReplicatedStorage")
+        local remote = rs:FindFirstChild("PlaytimeRewards") and rs.PlaytimeRewards:FindFirstChild("2")
+        local amount = 999999
+
+        if remote then
+            pcall(function()
+                remote:FireServer(amount)
+            end)
+            
+            Rayfield:Notify({
+                Title = "Draco Spawnned",
+                Content = "Draco claimed!",
+                Duration = 5,
+                Image = "rewind", 
+            })
+        else
+            Rayfield:Notify({
+                Title = "Error",
+                Content = "Draco Spawner remote not found",
+                Duration = 5,
+                Image = "alert-circle", 
+            })
+        end
+    end
+})
+
+ModsTab:CreateButton({
+    Name = "Give C4",
+    Callback = function()
+        local rs = game:GetService("ReplicatedStorage")
+        local purchaseC4Remote = rs:FindFirstChild("PURCHASEC4")
+        if purchaseC4Remote then
+            pcall(function()
+                purchaseC4Remote:FireServer()
+            end)
+            Rayfield:Notify({
+                Title = "Item Granted",
+                Content = "You were given C4!",
+                Duration = 5,
+                Image = "rewind"
+            })
+        else
+            Rayfield:Notify({
+                Title = "Error",
+                Content = "PURCHASEC4 remote not found",
+                Duration = 5,
+                Image = "alert-circle"
+            })
+        end
+    end
+})
+
+
+local Button = ModsTab:CreateButton({
+    Name = "Give Money",
+    Callback = function()
+        local rs = game:GetService("ReplicatedStorage")
+        local rewardIndexes = {"8","7","5","3","1"}
+        local amount = 999999 
+
+        for _, index in ipairs(rewardIndexes) do
+            local remote = rs:FindFirstChild("PlaytimeRewards") and rs.PlaytimeRewards:FindFirstChild(index)
+            if remote then
+                pcall(function()
+                    remote:FireServer(amount)
+                end)
+            end
+        end
+
+      
+        Rayfield:Notify({
+            Title = "Money Given",
+            Content = "You were given 33,500!",
+            Duration = 5,
+            Image = "rewind", 
+        })
+    end
+})
 
 
 Rayfield:LoadConfiguration()
